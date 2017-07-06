@@ -17,7 +17,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var pressHint = false
     var totalTime = 0
     var timer = Timer()
-    @IBOutlet weak var overImage: UIImageView!
+    var over = false
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var resultRecord: UITextView!
     @IBOutlet weak var chanceText: UITextField!
@@ -34,6 +34,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         initial()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if over == true {
+            over = false
+            initial()
+        }
+    }
+    
     func initial(){
         var nums = Array(0...9)
         for i in 0...3 {
@@ -49,11 +57,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         resultRecord.isHidden = true
         pressHint = false
         hintBtn.isEnabled = true
-        hintBtn.isHidden = false
-        overImage.isHidden = true
-        timeLabel.isHidden = true
-        restartWidthConstraint.constant = 80
-        restartHeightConstraint.constant = 80
+        timeLabel.text = "0:00"
         for i in 0...3 {
             picker.selectRow(5, inComponent: i, animated: true)
         }
@@ -75,7 +79,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBAction func restart(_ sender: Any) {
         let optionMenu = UIAlertController(title: nil, message: "確定要重新開始嗎？", preferredStyle: .alert)
-        let yes = UIAlertAction(title: "確定", style: .default, handler: {action in self.initial()})
+        let yes = UIAlertAction(title: "確定", style: .default, handler: {action in
+            self.timer.invalidate()
+            self.initial()
+        })
         let no = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         optionMenu.addAction(yes)
         optionMenu.addAction(no)
@@ -140,27 +147,23 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             //lose
                 if chance == 0 {
                     timer.invalidate()
-                    timeLabel.text = "時間：\(totalTime/60)m\(totalTime%60)s"
-                    overImage.image = UIImage(named: "lose")
-                    overImage.isHidden = false
-                    timeLabel.isHidden = false
-                    hintBtn.isHidden = true
-                    restartWidthConstraint.constant = 100
-                    restartHeightConstraint.constant = 100
+                    over = true
                     addRecord(win: false, time: totalTime)
+                    let controller = self.storyboard?.instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
+                    controller.win = false
+                    controller.time = totalTime
+                    self.present(controller, animated: false, completion: nil)
                 }
             }
             //win
             else {
                 timer.invalidate()
-                timeLabel.text = "時間：\(totalTime/60)m\(totalTime%60)s"
-                overImage.image = UIImage(named: "win")
-                overImage.isHidden = false
-                timeLabel.isHidden = false
-                hintBtn.isHidden = true
-                restartWidthConstraint.constant = 100
-                restartHeightConstraint.constant = 100
+                over = true
                 addRecord(win: true, time: totalTime)
+                let controller = self.storyboard?.instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
+                controller.win = true
+                controller.time = totalTime
+                self.present(controller, animated: false, completion: nil)
             }
 
         }
@@ -189,6 +192,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func updateTime(){
         totalTime += 1
+        timeLabel.text = String(totalTime/60) + ":" + String(format: "%02d", totalTime%60)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

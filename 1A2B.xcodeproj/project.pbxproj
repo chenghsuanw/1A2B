@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F1AB3EA1F0E5833000DCE22 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1AB3E91F0E5833000DCE22 /* ResultViewController.swift */; };
 		9F99603B1F06A8E70055C281 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F99603A1F06A8E70055C281 /* RecordViewController.swift */; };
 		9FBBBB321EFD5CCA0041803C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBBBB311EFD5CCA0041803C /* AppDelegate.swift */; };
 		9FBBBB341EFD5CCA0041803C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBBBB331EFD5CCA0041803C /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F1AB3E91F0E5833000DCE22 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		9F99603A1F06A8E70055C281 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		9FBBBB2E1EFD5CCA0041803C /* 1A2B.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 1A2B.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBBBB311EFD5CCA0041803C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				9FBBBB331EFD5CCA0041803C /* ViewController.swift */,
 				9F99603A1F06A8E70055C281 /* RecordViewController.swift */,
 				9FBBBB351EFD5CCA0041803C /* Main.storyboard */,
+				9F1AB3E91F0E5833000DCE22 /* ResultViewController.swift */,
 				9FBBBB461EFD71A00041803C /* RuleViewController.swift */,
 				9FBBBB3B1EFD5CCB0041803C /* Assets.xcassets */,
 				9FBBBB3D1EFD5CCB0041803C /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F1AB3EA1F0E5833000DCE22 /* ResultViewController.swift in Sources */,
 				9FBBBB341EFD5CCA0041803C /* ViewController.swift in Sources */,
 				9FBBBB321EFD5CCA0041803C /* AppDelegate.swift in Sources */,
 				9F99603B1F06A8E70055C281 /* RecordViewController.swift in Sources */,

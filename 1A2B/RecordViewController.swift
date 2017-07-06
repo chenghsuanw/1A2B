@@ -42,8 +42,8 @@ class RecordViewController: UIViewController {
         else {
             winRateLabel.text = String(format: "%.2f", Float(winCount)/Float(gameCount)*100) + "%"
         }
-        bestTimeLabel.text = "\(bestTime/60)m\(bestTime%60)s"
-        aveTimeLabel.text = "\(totalTime/60)m\(totalTime%60)s"
+        bestTimeLabel.text = String(bestTime/60) + ":" + String(format: "%02d", bestTime%60)
+        aveTimeLabel.text = String(totalTime/60) + ":" + String(format: "%02d", totalTime%60)
     }
 
     @IBAction func clear(_ sender: Any) {
