@@ -11,19 +11,22 @@ import UIKit
 class ResultViewController: UIViewController {
 
     @IBOutlet weak var resultImage: UIImageView!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var resultLabel: UILabel!
     var win:Bool?
     var time:Int?
+    var answer:[Int]?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         if win! == true {
             resultImage.image = UIImage(named: "win")
+            let bestTime = UserDefaults.standard.integer(forKey: "bestTime")
+            resultLabel.text = "本次時間：" + String(time!/60) + ":" + String(format: "%02d", time!%60) + "\n最佳時間：" + String(bestTime/60) + ":" + String(format: "%02d", bestTime%60)
         }
         else {
             resultImage.image = UIImage(named: "lose")
+            resultLabel.text = "正確答案：\(answer![0])\(answer![1])\(answer![2])\(answer![3])"
         }
-        timeLabel.text = "時間：" + String(time!/60) + ":" + String(format: "%02d", time!%60)
     }
 
     @IBAction func restart(_ sender: Any) {
@@ -34,7 +37,8 @@ class ResultViewController: UIViewController {
         let no = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         optionMenu.addAction(no)
         optionMenu.addAction(yes)
-        present(optionMenu, animated: true, completion: nil)
+        let controller = presentingViewController as! ViewController
+        present(optionMenu, animated: true, completion: controller.timerStart)
     }
     
     @IBAction func record(_ sender: Any) {

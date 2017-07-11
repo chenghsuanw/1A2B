@@ -18,20 +18,31 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var totalTime = 0
     var timer = Timer()
     var over = false
+    var pressRule = false
+    var hintIndex = 0
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var resultRecord: UITextView!
     @IBOutlet weak var chanceText: UITextField!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var hintBtn: UIButton!
+    @IBOutlet weak var hintLabel: UILabel!
     @IBOutlet weak var restartWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var restartHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var ruleButton: UIButton!
+    
   
+    func timerStart(){
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         picker.dataSource = self as UIPickerViewDataSource
         picker.delegate = self as UIPickerViewDelegate
         initial()
+        if UserDefaults.standard.bool(forKey: "hasViewRule") {
+            timerStart()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -42,51 +53,101 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if UserDefaults.standard.bool(forKey: "hasViewRule") {
+            return
+        }
+        if let pageViewController = storyboard?.instantiateViewController(withIdentifier: "RuleController") as? RulePageViewController {
+            present(pageViewController, animated: false, completion: initial)
+        }
+    }
+    
+    
     func initial(){
         var nums = Array(0...9)
         for i in 0...3 {
             let index = Int(arc4random_uniform(UInt32(nums.count)))
             answer[i] = nums[index]
             nums.remove(at: index)
-            ////
-            print(answer[i])
         }
         chance = 10
         chanceText.text = "\(chance)"
         resultRecord.text = ""
-        resultRecord.isHidden = true
         pressHint = false
         hintBtn.isEnabled = true
+        hintLabel.isHidden = true
         timeLabel.text = "0:00"
         for i in 0...3 {
             picker.selectRow(5, inComponent: i, animated: true)
         }
         totalTime = 0
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
     }
     
     @IBAction func hint(_ sender: Any) {
         pressHint = true
         hintBtn.isEnabled = false
-        picker.selectRow(answer[0], inComponent: 0, animated: true)
-        picker.selectRow(answer[2], inComponent: 2, animated: true)
+        hintLabel.isHidden = false
+        hintIndex = Int(arc4random_uniform(4))
+        while answer[hintIndex] == Int((picker.delegate?.pickerView!(picker, titleForRow: picker.selectedRow(inComponent: hintIndex), forComponent: hintIndex))!)! {
+            hintIndex = Int(arc4random_uniform(4))
+        }
+        switch hintIndex {
+        case 0:
+            hintLabel.text = "提示：\(answer[hintIndex])XXX"
+        case 1:
+            hintLabel.text = "提示：X\(answer[hintIndex])XX"
+        case 2:
+            hintLabel.text = "提示：XX\(answer[hintIndex])X"
+        default:
+            hintLabel.text = "提示：XXX\(answer[hintIndex])"
+        }
+        picker.selectRow(answer[hintIndex], inComponent: hintIndex, animated: true)
     }
     
-    @IBAction func record(_ sender: Any) {
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "RecordViewController")
-        self.present(controller!, animated: true, completion: nil)
+    @IBAction func list(_ sender: Any) {
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let ruleAction = UIAlertAction(title: "規則", style: .default, handler: {action in
+            self.rule()
+        })
+        let restartAction = UIAlertAction(title: "重新", style: .default, handler: {action in
+            self.restart()
+        })
+        let recordAction = UIAlertAction(title: "紀錄", style: .default, handler: {action in
+            self.record()
+        })
+        let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        optionMenu.addAction(ruleAction)
+        optionMenu.addAction(restartAction)
+        optionMenu.addAction(recordAction)
+        optionMenu.addAction(cancel)
+        present(optionMenu, animated: true, completion: nil)
     }
     
-    @IBAction func restart(_ sender: Any) {
+    func rule(){
+        pressRule = true
+        if let pageViewController = storyboard?.instantiateViewController(withIdentifier: "RuleController") as? RulePageViewController {
+            timer.invalidate()
+            present(pageViewController, animated: true, completion: nil)
+        }
+    }
+    
+    func restart(){
         let optionMenu = UIAlertController(title: nil, message: "確定要重新開始嗎？", preferredStyle: .alert)
         let yes = UIAlertAction(title: "確定", style: .default, handler: {action in
             self.timer.invalidate()
             self.initial()
+            self.timerStart()
         })
         let no = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         optionMenu.addAction(yes)
         optionMenu.addAction(no)
         present(optionMenu, animated: true, completion: nil)
+    }
+    
+    func record(){
+        self.timer.invalidate()
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "RecordViewController")
+        self.present(controller!, animated: true, completion: nil)
     }
     
     func legalInput(input:[Int])->Bool {
@@ -104,15 +165,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         for i in 0...3 {
             input[i] = Int((picker.delegate?.pickerView!(picker, titleForRow: picker.selectedRow(inComponent: i), forComponent: i))!)!
             if pressHint == true {
-                if i == 1 || i == 3 {
-                    picker.selectRow(5, inComponent: i, animated: true)
-                }
-                else {
+                if i == hintIndex {
                     picker.selectRow(answer[i], inComponent: i, animated: true)
                 }
-            }
-            else {
-                picker.selectRow(5, inComponent: i, animated: true)
             }
         }
         if legalInput(input: input) == false {
@@ -139,7 +194,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             }
             resultRecord.text! += "\(input[0])\(input[1])\(input[2])\(input[3])\t\t\(acount)A\(bcount)B\n"
             resultRecord.font = UIFont.systemFont(ofSize: 20)
-            resultRecord.isHidden = false
             resultRecord.scrollRangeToVisible(NSMakeRange(resultRecord.text.characters.count-1, 0))
             if acount != 4 {
                 chance -= 1
@@ -152,6 +206,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                     let controller = self.storyboard?.instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
                     controller.win = false
                     controller.time = totalTime
+                    controller.answer = self.answer
                     self.present(controller, animated: false, completion: nil)
                 }
             }
@@ -188,6 +243,20 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             userDefault.set(bestTime, forKey: "bestTime")
         }
         userDefault.synchronize()
+    }
+    
+    func continueOrRestart(){
+        let optionMenu = UIAlertController(title: nil, message: "要重新開始或是繼續遊戲？", preferredStyle: .alert)
+        let conti = UIAlertAction(title: "繼續遊戲", style: .cancel, handler: {action in
+            self.timerStart()
+        })
+        let restart = UIAlertAction(title: "重新開始", style: .default, handler: {action in
+            self.initial()
+            self.timerStart()
+        })
+        optionMenu.addAction(conti)
+        optionMenu.addAction(restart)
+        present(optionMenu, animated: true, completion: nil)
     }
     
     func updateTime(){

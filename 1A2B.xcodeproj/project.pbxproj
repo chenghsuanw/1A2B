@@ -9,24 +9,26 @@
 /* Begin PBXBuildFile section */
 		9F1AB3EA1F0E5833000DCE22 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1AB3E91F0E5833000DCE22 /* ResultViewController.swift */; };
 		9F99603B1F06A8E70055C281 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F99603A1F06A8E70055C281 /* RecordViewController.swift */; };
+		9FB098C21F13C5BB00781DC8 /* RuleContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB098C11F13C5BB00781DC8 /* RuleContentViewController.swift */; };
+		9FB098C41F13C75F00781DC8 /* RulePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB098C31F13C75F00781DC8 /* RulePageViewController.swift */; };
 		9FBBBB321EFD5CCA0041803C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBBBB311EFD5CCA0041803C /* AppDelegate.swift */; };
 		9FBBBB341EFD5CCA0041803C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBBBB331EFD5CCA0041803C /* ViewController.swift */; };
 		9FBBBB371EFD5CCA0041803C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FBBBB351EFD5CCA0041803C /* Main.storyboard */; };
 		9FBBBB3C1EFD5CCB0041803C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FBBBB3B1EFD5CCB0041803C /* Assets.xcassets */; };
 		9FBBBB3F1EFD5CCB0041803C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FBBBB3D1EFD5CCB0041803C /* LaunchScreen.storyboard */; };
-		9FBBBB471EFD71A00041803C /* RuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBBBB461EFD71A00041803C /* RuleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9F1AB3E91F0E5833000DCE22 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		9F99603A1F06A8E70055C281 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		9FB098C11F13C5BB00781DC8 /* RuleContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleContentViewController.swift; sourceTree = "<group>"; };
+		9FB098C31F13C75F00781DC8 /* RulePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulePageViewController.swift; sourceTree = "<group>"; };
 		9FBBBB2E1EFD5CCA0041803C /* 1A2B.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 1A2B.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBBBB311EFD5CCA0041803C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9FBBBB331EFD5CCA0041803C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9FBBBB361EFD5CCA0041803C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9FBBBB3B1EFD5CCB0041803C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FBBBB3E1EFD5CCB0041803C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9FBBBB461EFD71A00041803C /* RuleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,9 +64,10 @@
 				9FBBBB311EFD5CCA0041803C /* AppDelegate.swift */,
 				9FBBBB331EFD5CCA0041803C /* ViewController.swift */,
 				9F99603A1F06A8E70055C281 /* RecordViewController.swift */,
+				9FB098C11F13C5BB00781DC8 /* RuleContentViewController.swift */,
+				9FB098C31F13C75F00781DC8 /* RulePageViewController.swift */,
 				9FBBBB351EFD5CCA0041803C /* Main.storyboard */,
 				9F1AB3E91F0E5833000DCE22 /* ResultViewController.swift */,
-				9FBBBB461EFD71A00041803C /* RuleViewController.swift */,
 				9FBBBB3B1EFD5CCB0041803C /* Assets.xcassets */,
 				9FBBBB3D1EFD5CCB0041803C /* LaunchScreen.storyboard */,
 			);
@@ -103,7 +106,7 @@
 				TargetAttributes = {
 					9FBBBB2D1EFD5CCA0041803C = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = J4KM9U6844;
+						DevelopmentTeam = SNQ495RQSZ;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -146,9 +149,10 @@
 			files = (
 				9F1AB3EA1F0E5833000DCE22 /* ResultViewController.swift in Sources */,
 				9FBBBB341EFD5CCA0041803C /* ViewController.swift in Sources */,
+				9FB098C21F13C5BB00781DC8 /* RuleContentViewController.swift in Sources */,
 				9FBBBB321EFD5CCA0041803C /* AppDelegate.swift in Sources */,
 				9F99603B1F06A8E70055C281 /* RecordViewController.swift in Sources */,
-				9FBBBB471EFD71A00041803C /* RuleViewController.swift in Sources */,
+				9FB098C41F13C75F00781DC8 /* RulePageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,11 +275,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = J4KM9U6844;
+				DEVELOPMENT_TEAM = SNQ495RQSZ;
 				INFOPLIST_FILE = 1A2B/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.chenghsuan.-A2B";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chenghsuan.1A2B;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -285,11 +289,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = J4KM9U6844;
+				DEVELOPMENT_TEAM = SNQ495RQSZ;
 				INFOPLIST_FILE = 1A2B/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.chenghsuan.-A2B";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chenghsuan.1A2B;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
