@@ -15,6 +15,7 @@ class ResultViewController: UIViewController {
     var win:Bool?
     var time:Int?
     var answer:[Int]?
+    var resultRecord:String?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

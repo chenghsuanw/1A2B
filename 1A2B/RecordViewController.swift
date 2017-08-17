@@ -41,11 +41,17 @@ class RecordViewController: UIViewController {
             aveTimeLabel.text = "0:00"
         }
         else {
-            winRateLabel.text = String(format: "%.0f", Float(winCount)/Float(gameCount)*100) + "%"
-            aveTimeLabel.text = String((totalTime/winCount)/60) + ":" + String(format: "%02d", (totalTime/winCount)%60)
+            if winCount == 0 {
+                winRateLabel.text = "0%"
+                aveTimeLabel.text = "0:00"
+            }
+            else {
+                winRateLabel.text = String(format: "%.0f", Float(winCount)/Float(gameCount)*100) + "%"
+                aveTimeLabel.text = String((totalTime/winCount)/60) + ":" + String(format: "%02d", (totalTime/winCount)%60)
+            }
         }
         bestTimeLabel.text = String(bestTime/60) + ":" + String(format: "%02d", bestTime%60)
-            }
+    }
 
     @IBAction func clear(_ sender: Any) {
         let optionMenu = UIAlertController(title: nil, message: "確定要清除記錄嗎？", preferredStyle: .alert)
