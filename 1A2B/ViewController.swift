@@ -172,6 +172,7 @@ class ViewController: UIViewController{
             while !input.isEmpty {
                 let letter = input.popLast()
                 numberButtons[letter!].isEnabled = true
+                numberButtons[letter!].setTitleColor(UIColor.black, for: .normal)
                 let index = inputLabel.text?.index(inputLabel.text!.startIndex, offsetBy: input.count*3)
                 inputLabel.text?.remove(at: index!)
                 inputLabel.text?.insert("＿", at: index!)
